@@ -98,7 +98,6 @@ azure openai endpoint: https://abinsinghrajan-4017-resource.openai.azure.com/ope
 
 Target URI: https://abinsinghrajan-4017-resource.services.ai.azure.com
 
-key: 3rOYxOA2WYmKCrJ0sRLhg21B1JEmlLKFNjaqtYamA8fqTCYW5WASJQQJ99CFACHYHv6XJ3w3AAAAACOGutXC
 
 # Deploy the chat model
 
@@ -106,7 +105,6 @@ gpt-4o-mini
 
 Target URI: "https://abinsinghrajan-6896-resource.services.ai.azure.com/openai/v1"
 
-key: BENfxuastv7XknVr4Ysh6SA7HWAvok8vO69QdgCaYgwxj2zjRB2XJQQJ99CFACYeBjFXJ3w3AAAAACOGsrkH
 
 
 ##################################
