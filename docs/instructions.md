@@ -290,6 +290,9 @@ text-embedding-3-small
     # Tag image
     docker tag azure-rag:v1 akspracticeacr26abin.azurecr.io/azure-rag:v1
 
+    # ACR login
+    az acr login --name akspracticeacr26abin
+
     # Push image
     docker push akspracticeacr26abin.azurecr.io/azure-rag:v1
 

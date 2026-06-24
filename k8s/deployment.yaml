@@ -31,37 +31,76 @@ spec:
         env:
 
         - name: AZURE_FOUNDRY_ENDPOINT
-          value: "https://abinsinghrajan-1652-resource.services.ai.azure.com/openai/v1"
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_FOUNDRY_ENDPOINT
 
         - name: AZURE_FOUNDRY_CHAT_DEPLOYMENT
-          value: "gpt-4o-mini"
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_FOUNDRY_CHAT_DEPLOYMENT
 
         - name: AZURE_FOUNDRY_EMBEDDING_DEPLOYMENT
-          value: "text-embedding-3-small"
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_FOUNDRY_EMBEDDING_DEPLOYMENT
+
+        - name: AZURE_STORAGE_CONTAINER
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_STORAGE_CONTAINER
 
         - name: AZURE_SEARCH_ENDPOINT
-          value: "https://abinlabs-aisearch.search.windows.net"
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_SEARCH_ENDPOINT
 
         - name: AZURE_SEARCH_INDEX
-          value: "documents"
-
-        - name: AZURE_FOUNDRY_API_KEY
           valueFrom:
             secretKeyRef:
               name: rag-secrets
-              key: AZURE_FOUNDRY_API_KEY
+              key: AZURE_SEARCH_INDEX
 
-        - name: AZURE_SEARCH_API_KEY
+        - name: CHUNK_SIZE
           valueFrom:
             secretKeyRef:
               name: rag-secrets
-              key: AZURE_SEARCH_API_KEY
+              key: CHUNK_SIZE
 
-        - name: AZURE_STORAGE_CONNECTION_STRING
+        - name: CHUNK_OVERLAP
           valueFrom:
             secretKeyRef:
               name: rag-secrets
-              key: AZURE_STORAGE_CONNECTION_STRING
+              key: CHUNK_OVERLAP
+
+        - name: KEY_VAULT_URL
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: KEY_VAULT_URL
+
+        - name: AZURE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_CLIENT_ID
+
+        - name: AZURE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_CLIENT_SECRET
+
+        - name: AZURE_TENANT_ID
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_TENANT_ID
 
         readinessProbe:
 
