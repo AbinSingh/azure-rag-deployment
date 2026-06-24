@@ -1,6 +1,7 @@
 from azure.storage.blob import BlobServiceClient
 import os
 from dotenv import load_dotenv
+from app.config.settings import settings
 
 load_dotenv()
 
@@ -9,13 +10,10 @@ class BlobStorage:
 
     def __init__(self):
 
-        self.connection_string = os.getenv(
-            "AZURE_STORAGE_CONNECTION_STRING"
-        )
+        self.connection_string = settings.AZURE_STORAGE_CONNECTION_STRING
 
-        self.container_name = os.getenv(
-            "AZURE_STORAGE_CONTAINER"
-        )
+        self.container_name = settings.AZURE_STORAGE_CONTAINER
+
 
         self.client = BlobServiceClient.from_connection_string(
             self.connection_string

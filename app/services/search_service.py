@@ -19,6 +19,9 @@ from azure.search.documents.indexes.models import (
 )
 from azure.search.documents.models import VectorizedQuery
 
+from app.config.settings import settings
+
+
 load_dotenv()
 
 
@@ -26,17 +29,11 @@ class SearchService:
 
     def __init__(self):
 
-        self.endpoint = os.getenv(
-            "AZURE_SEARCH_ENDPOINT"
-        )
+        self.endpoint = settings.AZURE_SEARCH_ENDPOINT
 
-        self.key = os.getenv(
-            "AZURE_SEARCH_API_KEY"
-        )
+        self.key = settings.AZURE_SEARCH_API_KEY
 
-        self.index_name = os.getenv(
-            "AZURE_SEARCH_INDEX"
-        )
+        self.index_name = settings.AZURE_SEARCH_INDEX
 
         credential = AzureKeyCredential(
             self.key
