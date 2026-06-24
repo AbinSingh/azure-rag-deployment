@@ -274,10 +274,79 @@ Azure AI Foundry       Azure AI Search    AI Foundry
 text-embedding-3-small
 
 
+#############################################################################################
+############################################ PART 5 #########################################
+#############################################################################################
+
+# Dockerize Application
+    docker build -t azure-rag:v1 .
+    docker run -p 8000:8000 azure-rag:v1
+# to pass the env file
+    docker run --env-file .env -p 8000:8000 azure-rag:v1
+
+# create AKS cluster
+
+# Create ACR
+    # Tag image
+    docker tag azure-rag:v1 akspracticeacr26abin.azurecr.io/azure-rag:v1
+
+    # Push image
+    docker push akspracticeacr26abin.azurecr.io/azure-rag:v1
+
+    # Attach ACR to AKS
+    az aks update --resource-group abindev-rg --name aks-practice-cluster --attach-acr akspracticeacr26abin
+
+# Create kubernetes secrets
+    kubectl create secret generic rag-secrets --from-env-file=.env
+
+# Create Deployment YAML
+# Create Service YAML
+    kubectl apply -f deployment.yaml
+    kubectl apply -f service.yaml
+
+# Current Architecture
+                Users
+                  │
+                  ▼
+              FastAPI
+                  │
+                  ▼
+             AKS Cluster
+                  │
+                  ▼
+             RAG Service
+                  │
+    ┌─────────────┼─────────────┐
+    │             │             │
+    ▼             ▼             ▼
+Embeddings   AI Search      GPT-4o-mini
+    │             │             │
+    └──────┬──────┴─────────────┘
+           │
+           ▼
+      Blob Storage
 
 
+#############################################################################################
+############################################ PART 6 #########################################
+#############################################################################################
 
+Suggested Learning Roadmap (Next 2 Months)
+Week 1 - Metadata + Multi-document ingestion
 
+Week 2 - Hybrid Search
+
+Week 3 - Source citations + conversation history
+
+Week 4 - Key Vault integration
+
+Week 5  - Managed Identity
+
+Week 6 - Application Insights
+
+Week 7 - Jenkins CI/CD
+
+Week 8 - Terraform deployment
 
 
 

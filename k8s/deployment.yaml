@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: azure-rag
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: azure-rag
+
+  template:
+
+    metadata:
+      labels:
+        app: azure-rag
+
+    spec:
+
+      containers:
+
+      - name: azure-rag
+
+        image: akspracticeacr26abin.azurecr.io/azure-rag:v1
+
+        ports:
+        - containerPort: 8000
+
+        env:
+
+        - name: AZURE_FOUNDRY_ENDPOINT
+          value: "https://abinsinghrajan-1652-resource.services.ai.azure.com/openai/v1"
+
+        - name: AZURE_FOUNDRY_CHAT_DEPLOYMENT
+          value: "gpt-4o-mini"
+
+        - name: AZURE_FOUNDRY_EMBEDDING_DEPLOYMENT
+          value: "text-embedding-3-small"
+
+        - name: AZURE_SEARCH_ENDPOINT
+          value: "https://abinlabs-aisearch.search.windows.net"
+
+        - name: AZURE_SEARCH_INDEX
+          value: "documents"
+
+        - name: AZURE_FOUNDRY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_FOUNDRY_API_KEY
+
+        - name: AZURE_SEARCH_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_SEARCH_API_KEY
+
+        - name: AZURE_STORAGE_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: AZURE_STORAGE_CONNECTION_STRING
+
+        readinessProbe:
+
+          httpGet:
+            path: /health
+            port: 8000
+
+          initialDelaySeconds: 20
+
+        livenessProbe:
+
+          httpGet:
+            path: /health
+            port: 8000
+
+          initialDelaySeconds: 30
