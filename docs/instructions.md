@@ -298,14 +298,24 @@ text-embedding-3-small
 
     # Attach ACR to AKS
     az aks update --resource-group abindev-rg --name aks-practice-cluster --attach-acr akspracticeacr26abin
-
+ 
+    # Delet image from ACR repository
+    az acr repository delete --name akspracticeacr26abin --image azure-rag:v1
 # Create kubernetes secrets
     kubectl create secret generic rag-secrets --from-env-file=.env
 
 # Create Deployment YAML
 # Create Service YAML
+    az aks get-credentials --resource-group abindev-rg --name aks-practice-cluster
+    kubectl apply -f configmap.yaml
     kubectl apply -f deployment.yaml
     kubectl apply -f service.yaml
+
+# rollout deployment
+    kubectl rollout restart deployment azure-rag
+
+# to get configmap
+    kubectl get configmap rag-config
 
 # Current Architecture
                 Users

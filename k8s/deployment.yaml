@@ -24,83 +24,72 @@ spec:
       - name: azure-rag
 
         image: akspracticeacr26abin.azurecr.io/azure-rag:v1
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 8000
 
         env:
 
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: rag-config
+              key: ENVIRONMENT
+
         - name: AZURE_FOUNDRY_ENDPOINT
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: AZURE_FOUNDRY_ENDPOINT
 
         - name: AZURE_FOUNDRY_CHAT_DEPLOYMENT
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: AZURE_FOUNDRY_CHAT_DEPLOYMENT
 
         - name: AZURE_FOUNDRY_EMBEDDING_DEPLOYMENT
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: AZURE_FOUNDRY_EMBEDDING_DEPLOYMENT
 
         - name: AZURE_STORAGE_CONTAINER
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: AZURE_STORAGE_CONTAINER
 
         - name: AZURE_SEARCH_ENDPOINT
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: AZURE_SEARCH_ENDPOINT
 
         - name: AZURE_SEARCH_INDEX
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: AZURE_SEARCH_INDEX
 
         - name: CHUNK_SIZE
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: CHUNK_SIZE
 
         - name: CHUNK_OVERLAP
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: CHUNK_OVERLAP
 
         - name: KEY_VAULT_URL
           valueFrom:
-            secretKeyRef:
-              name: rag-secrets
+            configMapKeyRef:
+              name: rag-config
               key: KEY_VAULT_URL
-
-        - name: AZURE_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: rag-secrets
-              key: AZURE_CLIENT_ID
-
-        - name: AZURE_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: rag-secrets
-              key: AZURE_CLIENT_SECRET
-
-        - name: AZURE_TENANT_ID
-          valueFrom:
-            secretKeyRef:
-              name: rag-secrets
-              key: AZURE_TENANT_ID
 
         readinessProbe:
 

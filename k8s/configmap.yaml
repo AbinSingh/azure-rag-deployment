@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: rag-config
+
+data:
+  ENVIRONMENT: "prod"
+  AZURE_FOUNDRY_ENDPOINT: "https://abinsinghrajan-7957-resource.services.ai.azure.com/openai/v1"
+  AZURE_FOUNDRY_CHAT_DEPLOYMENT: "gpt-5-mini"
+  AZURE_FOUNDRY_EMBEDDING_DEPLOYMENT: "text-embedding-3-small"
+  AZURE_STORAGE_CONTAINER: "documents"
+  AZURE_SEARCH_ENDPOINT: "https://abinlabs-aisearch.search.windows.net"
+  AZURE_SEARCH_INDEX: "documents"
+  CHUNK_SIZE: "1000"
+  CHUNK_OVERLAP: "200"
+  KEY_VAULT_URL: "https://abindevlabs-kv.vault.azure.net/"
+

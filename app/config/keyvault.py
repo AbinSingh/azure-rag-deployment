@@ -2,12 +2,22 @@ import os
 
 from dotenv import load_dotenv
 
-from azure.identity import ClientSecretCredential
-
+from azure.identity import DefaultAzureCredential, AzureCliCredential
 from azure.keyvault.secrets import SecretClient
 
 load_dotenv()
 
+def get_credential():
+
+    environment = os.getenv(
+        "ENVIRONMENT",
+        "local"
+    ).lower()
+
+    if environment == "local":
+        return AzureCliCredential()
+
+    return DefaultAzureCredential()
 
 class KeyVaultService:
 
@@ -17,11 +27,7 @@ class KeyVaultService:
             "KEY_VAULT_URL"
         )
 
-        credential = ClientSecretCredential(
-            tenant_id=os.getenv("AZURE_TENANT_ID"),
-            client_id=os.getenv("AZURE_CLIENT_ID"),
-            client_secret=os.getenv("AZURE_CLIENT_SECRET")
-        )
+        credential = get_credential()
 
         self.client = SecretClient(
             vault_url=vault_url,

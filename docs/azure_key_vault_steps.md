@@ -101,3 +101,9 @@ KEY_VAULT_URL=https://abinlabs-kv.vault.azure.net/
         Access Control (IAM)
           ↓
         Add Role Assignment
+
+    Role: Key Vault Secrets User
+
+    Assign to: rag-keyvault-sp
+
+    Verify under: Role Assignments
